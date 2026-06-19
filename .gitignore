@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# Scratch
+/tmp/
+*_scratch.*

@@ -1,0 +1,21 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+initial: "Initial load - page 1" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /users (X-Inertia: true)"
+  S -> S: "resolve page 1, label \"users.data\", compute cursor"
+  S -> C: "200 - props.users.data[]\nmergeProps: [\"users.data\"]\nscrollProps.users { nextPage: 2 }"
+}
+
+scroll: "User scrolls - fetch + append next page" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /users?page=2\nX-Inertia-Partial-Component: users/index\nX-Inertia-Partial-Data: users\nX-Inertia-Infinite-Scroll-Merge-Intent: append"
+  S -> C: "200 - props.users.data[]\nmergeProps: [\"users.data\"]\nscrollProps.users { nextPage: 3 }"
+  C -> C: "append page 2 items to the cached list"
+}
+
+(** -> **)[*].style.stroke: "#23201A"
+(** -> **)[*].style.font-color: "#56554d"

@@ -1,0 +1,13 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+C -> S: "GET /users - X-Inertia: true\nX-Inertia-Partial-Component: users/index\nX-Inertia-Partial-Data: users"
+S -> S: "component matches -> cherry-pick props"
+S -> S: "keep = (only ? in only) and (not in except), plus always"
+S -> C: "200 JSON - props = { users: [...] }  (+ always props)"
+C -> C: "replace only the returned props, keep the rest"
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

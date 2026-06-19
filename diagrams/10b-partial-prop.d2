@@ -1,0 +1,34 @@
+direction: down
+
+classes: {
+  box: { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A"; border-radius: 6 } }
+  dec: { shape: diamond; style: { fill: "#EFF5F0"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+}
+
+P: "a prop on this render" { class: box }
+A: "always prop?" { class: dec }
+R: "requested? (in only, not in except)" { class: dec }
+K: "category" { class: dec }
+INC: "resolve + send" { class: box }
+OMIT: "omit from response" { class: box }
+DEF: "resolve; on failure omit + add to rescuedProps" { class: box }
+MRG: "resolve + send + add to merge metadata" { class: box }
+ONCE: "resolve + send (except-once ignored) + onceProps" { class: box }
+SCR: "resolve + label data array + emit cursor" { class: box }
+
+P -> A
+A -> INC: yes
+A -> R: no
+R -> OMIT: no
+R -> K: yes
+K -> INC: "optional / eager"
+K -> DEF: deferred
+K -> MRG: "merge / deepMerge / prepend"
+K -> ONCE: once
+K -> SCR: scroll
+
+*.style.font-size: 12
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"
+(* -> *)[*].style.font-size: 11
+(* -> *)[*].style.italic: true

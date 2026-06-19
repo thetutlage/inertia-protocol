@@ -1,0 +1,21 @@
+direction: right
+
+classes: {
+  box: { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A"; border-radius: 6 } }
+  dec: { shape: diamond; style: { fill: "#EFF5F0"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+}
+
+A: "a scroll prop on this render" { class: box }
+B: "its path in X-Inertia-Reset?" { class: dec }
+C: "label data array (merge/prepend) + matchPropsOn\nscrollProps[path].reset = false" { class: box }
+D: "no merge label -> client replaces\nscrollProps[path].reset = true" { class: box }
+
+A -> B
+B -> C: no
+B -> D: yes
+
+*.style.font-size: 12
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"
+(* -> *)[*].style.font-size: 11
+(* -> *)[*].style.italic: true

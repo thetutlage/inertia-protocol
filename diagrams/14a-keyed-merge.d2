@@ -1,0 +1,12 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+C -> S: "partial reload requesting \"feed\" (a keyed merge prop)"
+S -> S: "label mergeProps=[\"feed\"], matchPropsOn=[\"feed.id\"]"
+S -> C: "200 - props.feed = [newItems]\nmergeProps: [\"feed\"], matchPropsOn: [\"feed.id\"]"
+C -> C: "append newItems to cached feed, deduping by item.id"
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

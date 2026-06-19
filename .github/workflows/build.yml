@@ -1,0 +1,24 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rendered-spec-up-to-date:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Rebuild index.html from build.py + committed SVGs
+        run: python3 build.py
+      - name: Fail if index.html is stale (rebuild and commit it)
+        run: |
+          if ! git diff --quiet -- index.html; then
+            echo "::error::index.html is out of date. Run 'python3 build.py' and commit the result."
+            git --no-pager diff --stat -- index.html
+            exit 1
+          fi

@@ -1,0 +1,13 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+C -> S: "partial reload requesting \"perms\" (a rescuable deferred prop)"
+S -> S: "resolve \"perms\" -> throws"
+S -> S: "catch + report error out of band"
+S -> C: "200 - \"perms\" omitted, rescuedProps: [\"perms\"]"
+C -> C: "render the rescue / error UI for \"perms\""
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

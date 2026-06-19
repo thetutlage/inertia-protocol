@@ -1,0 +1,14 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+C -> S: "DELETE /users/1 - X-Inertia: true"
+S -> S: "handler issues redirect to /users (302)"
+S -> S: "method is PUT/PATCH/DELETE and status is 302 -> upgrade to 303"
+S -> C: "303 See Other - Location: /users"
+C -> S: "GET /users - X-Inertia: true"
+S -> C: "200 JSON page object"
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

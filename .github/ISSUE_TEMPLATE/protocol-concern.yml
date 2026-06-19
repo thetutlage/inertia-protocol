@@ -1,0 +1,49 @@
+name: Protocol concern / ambiguity
+description: Something in the spec is underspecified, contradictory, or hard to implement against.
+title: "[concern] <short summary>"
+labels: ["concern"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping sharpen the spec. The most useful reports quote the
+        exact text and cite the section number.
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: Which section of protocol.md does this concern? (e.g. "9. Partial reloads")
+      placeholder: "9. Partial reloads"
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: The passage
+      description: Quote the exact text that is unclear or contradictory.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Why it is ambiguous / problematic
+      description: What did you have to guess at? What are the two ways it could be read?
+    validations:
+      required: true
+  - type: textarea
+    id: behaviour
+    attributes:
+      label: Observed client behaviour (if known)
+      description: >
+        If you know what the official client (`@inertiajs/core` v3) actually does,
+        describe it and link to the source or an example request/response.
+    validations:
+      required: false
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording (optional)
+      description: If you have a proposed clarification, drop it here.
+    validations:
+      required: false

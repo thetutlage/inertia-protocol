@@ -1,0 +1,25 @@
+direction: down
+
+classes: {
+  box: { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A"; border-radius: 6 } }
+  dec: { shape: diamond; style: { fill: "#EFF5F0"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+}
+
+a: "Request arrives" { class: box }
+b: "X-Inertia: true header?" { class: dec }
+c: "Initial load:\nfull HTML document" { class: box }
+c1: "HTML shell embedding the\npage object in a JSON script tag" { class: box }
+d: "Inertia visit:\npage object as JSON" { class: box }
+d1: "X-Inertia: true on response\nbody = page object" { class: box }
+
+a -> b
+b -> c: no
+c -> c1
+b -> d: yes
+d -> d1
+
+*.style.font-size: 12
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"
+(* -> *)[*].style.font-size: 11
+(* -> *)[*].style.italic: true

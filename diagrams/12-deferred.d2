@@ -1,0 +1,23 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+phase1: "Phase 1 - full visit (ships the manifest)" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /dashboard (X-Inertia: true)"
+  S -> S: "deferred prop \"stats\" -> announce, skip value"
+  S -> C: "200 - props (no stats) + deferredProps: { default: [\"stats\"] }"
+  C -> C: "mount, read the deferred group manifest"
+}
+
+phase2: "Phase 2 - automatic partial reload, one per group" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /dashboard\nX-Inertia-Partial-Component: dashboard\nX-Inertia-Partial-Data: stats"
+  S -> S: "resolve \"stats\" (deferredProps is empty here)"
+  S -> C: "200 - props: { stats: {...} }"
+  C -> C: "fill in stats"
+}
+
+(** -> **)[*].style.stroke: "#23201A"
+(** -> **)[*].style.font-color: "#56554d"

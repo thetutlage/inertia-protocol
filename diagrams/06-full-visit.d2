@@ -1,0 +1,13 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+C -> S: "GET /users - X-Inertia: true, X-Inertia-Version: a1b2c3"
+S -> S: "resolve eager props, build page object"
+S -> C: "200 JSON - X-Inertia: true, Vary: X-Inertia"
+S.note: "{ component, url, version, props, ... }" { style: { fill: "#EFF5F0"; stroke: "#C2D8C9"; font-color: "#23201A" } }
+C -> C: "swap component + props, push history entry"
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

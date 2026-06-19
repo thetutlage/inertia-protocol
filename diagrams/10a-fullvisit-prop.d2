@@ -1,0 +1,32 @@
+direction: down
+
+classes: {
+  box: { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A"; border-radius: 6 } }
+  dec: { shape: diamond; style: { fill: "#EFF5F0"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+}
+
+P: "a prop on this render" { class: box }
+O: "once, and client holds it fresh?" { class: dec }
+K: "category" { class: dec }
+SKIP1: "skip value, still emit onceProps entry" { class: box }
+INC: "resolve + send" { class: box }
+SKIP2: "skip (not announced)" { class: box }
+DEF: "announce in deferredProps, skip value" { class: box }
+MRG: "resolve + send + add to merge metadata" { class: box }
+SCR: "resolve + label data array + emit cursor" { class: box }
+
+P -> O
+O -> SKIP1: yes
+O -> K: no
+K -> INC: always
+K -> SKIP2: optional
+K -> DEF: deferred
+K -> MRG: "merge / deepMerge / prepend"
+K -> SCR: scroll
+K -> INC: eager
+
+*.style.font-size: 12
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"
+(* -> *)[*].style.font-size: 11
+(* -> *)[*].style.italic: true

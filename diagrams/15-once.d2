@@ -1,0 +1,23 @@
+shape: sequence_diagram
+
+C: Client { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+first: "First visit - client has nothing cached" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /dashboard (X-Inertia: true)"
+  S -> S: "\"lookups\" not in except-once -> resolve value"
+  S -> C: "200 - props.lookups + onceProps.lookups"
+  C -> C: "cache \"lookups\""
+}
+
+later: "Later visit - client still holds it fresh" {
+  style: { fill: transparent; stroke: "#E7E4DB"; font-color: "#1F7A4D" }
+  C -> S: "GET /dashboard\nX-Inertia-Except-Once-Props: lookups"
+  S -> S: "in except-once -> skip value (still emit metadata)"
+  S -> C: "200 - props has no lookups, onceProps.lookups present"
+  C -> C: "restore the cached \"lookups\" from its own state"
+}
+
+(** -> **)[*].style.stroke: "#23201A"
+(** -> **)[*].style.font-color: "#56554d"

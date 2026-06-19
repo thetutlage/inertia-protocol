@@ -1,0 +1,13 @@
+shape: sequence_diagram
+
+B: Browser { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+S: Server { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+
+B -> S: "GET /users  (no X-Inertia)"
+S -> S: "build page object"
+S -> S: "payload = JSON.stringify(page), escape / to \\/"
+S -> B: "200 text/html - shell + JSON script tag + mount element"
+B -> B: "read page from script tag, mount, take over"
+
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"

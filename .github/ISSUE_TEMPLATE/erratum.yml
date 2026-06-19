@@ -1,0 +1,27 @@
+name: Erratum
+description: A concrete, factual error — typo, wrong status code, a diagram that disagrees with the prose.
+title: "[erratum] <short summary>"
+labels: ["erratum"]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: Where is the error? (e.g. "8a. Redirect after a mutating request")
+      placeholder: "8a. Redirect after a mutating request"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What it currently says
+      description: Quote or screenshot the incorrect text/diagram.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say
+      description: The correct value/wording, and how you know (link, observed behaviour).
+    validations:
+      required: true

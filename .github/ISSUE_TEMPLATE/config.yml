@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Inertia.js (client / framework adapters)
+    url: https://github.com/inertiajs/inertia
+    about: This repo only documents the server-side protocol. New protocol features or client bugs belong upstream in Inertia itself.
+  - name: Question / discussion
+    url: https://github.com/thetutlage/inertia-protocol/discussions
+    about: Not sure if it's a spec issue? Ask here first.

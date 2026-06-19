@@ -1,0 +1,25 @@
+direction: right
+
+classes: {
+  box: { style: { fill: "#FCFBF8"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A"; border-radius: 6 } }
+  dec: { shape: diamond; style: { fill: "#EFF5F0"; stroke: "#1F7A4D"; stroke-width: 2; font-color: "#23201A" } }
+}
+
+A: "submission fails validation" { class: box }
+B: "store errors + redirect back (303)" { class: box }
+C: "next render: collect stored errors -> { field: message }" { class: box }
+E: "X-Inertia-Error-Bag set?" { class: dec }
+F: "expose as errors = { bag: { field: message } }" { class: box }
+G: "expose as errors = { field: message }" { class: box }
+
+A -> B
+B -> C
+C -> E
+E -> F: yes
+E -> G: no
+
+*.style.font-size: 12
+(* -> *)[*].style.stroke: "#23201A"
+(* -> *)[*].style.font-color: "#56554d"
+(* -> *)[*].style.font-size: 11
+(* -> *)[*].style.italic: true
