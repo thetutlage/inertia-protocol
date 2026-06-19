@@ -16,12 +16,7 @@ errors, and history control — not any one framework's API.
 - **Canonical source:** [`protocol.md`](./protocol.md) — the normative
   specification. This is what issues and pull requests reference.
 - **Rendered version:** [`index.html`](./index.html) — a styled, browsable
-  build of the same content, with diagrams. Once GitHub Pages is enabled for
-  this repository it is served at
-  **https://thetutlage.github.io/inertia-protocol/**.
-
-Requirement levels (**MUST** / **SHOULD** / **MAY**) follow
-[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+  build of the same content, with diagrams. **https://thetutlage.github.io/inertia-protocol/**.
 
 ## Scope
 
